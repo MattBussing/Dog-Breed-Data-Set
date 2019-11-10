@@ -2,6 +2,8 @@
 Grace Carter, Alex Michael, Matt Bussing
 # Images Originally From:
 http://vision.stanford.edu/aditya86/ImageNetDogs/.
+# Images Edited Phase:
+The original images from the Stanford Dogs Dataset were taken and processed by Alex and Grace. They located the dog in each image and returned a cropped version of the image, that is focused only on the dog.
 # Description:
 ## Colorado School of Mines
 ## CSCI-470: Introduction to Machine Learning
