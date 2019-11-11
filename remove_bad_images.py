@@ -1,39 +1,50 @@
+from PIL import Image
 import os
+import shutil
+import matplotlib.pyplot as plt
 
 files = []
 count = 0
 
-ORIGINAL = "Images/"
-OLD = 'OldImages/'
+ORIGINAL = "Images"
+OLD = 'OldImages'
 execution_path = os.getcwd()
 
-dirs = os.listdir(os.path.join(execution_path, ORIGINAL))
 
-print('dirs', dirs)
+# copy directory tree
+# check if it exists
+if OLD not in os.listdir(execution_path):
+    print('creating file tree')
+    shutil.copytree(src=ORIGINAL, dst=OLD,
+                    ignore=shutil.ignore_patterns('*.jpg'))
+else:
+    print('file tree already created')
 
-for onedir in dirs:
-    dirsplit = onedir.split('/')
-    os.makedirs(os.path.join(execution_path, OLD,
-                             dirsplit[-1]), exist_ok=True)
-    templist = os.listdir(os.path.join(
-        execution_path, "images/Images/", onedir))
-    mystring = ((os.path.join(execution_path, "images/Images/", onedir)))
-    files.append([mystring + "/" + s for s in templist])
+# iterate through files and display them
+# iterate through each breed
+location = execution_path + '/' + ORIGINAL
+for current_breed in os.listdir(location):
 
+    # iterate over dog photos in breed
+    print('looking at: ' + current_breed)
+    image_base_location = location + '/' + current_breed
+    for filename in os.listdir(image_base_location):
+        # image?
+        if filename.endswith(".jpg"):
+            image = image_base_location + '/' + filename
+            # show image
+            Image.open(image).show()
 
-# flattened = [val for sublist in files for val in sublist]
-# print(flattened[:10])
-# for filename in flattened:
-#     if filename.endswith(".jpg"):
-#         filenamesplit = filename.split('/')
-#         detections, objects_path = detector.detectCustomObjectsFromImage(
-#             custom_objects=custom, input_image=filename, extract_detected_objects=True, output_image_path=os.path.join(execution_path, "test.jpg"), minimum_percentage_probability=30)
-#     for eachObjectPath in objects_path:
-#         os.rename(os.path.join(execution_path, "test.jpg-objects", eachObjectPath),
-#                   os.path.join(execution_path, "NewImages", filenamesplit[-2], (str(count) + "dog.jpg")))
-#     count += 1
-#     for eachObject, eachObjectPath in zip(detections, objects_path):
-#         print(eachObject["name"], " : ", eachObject["percentage_probability"],
-#               " : ", eachObject["box_points"])
-#         print("Object's image saved in " + eachObjectPath)
-#         print("-----------------------")
+            print(image_base_location)
+            print()
+            # potentially move
+            while True:
+                change = input('move (y/n):')
+                if change == 'y':
+                    backup_loc = image_base_location.replace(
+                        ORIGINAL, OLD) + '/' + filename
+                    shutil.move(image, backup_loc)
+                elif change == 'n':
+                    print('not moving')
+                else:
+                    print('error y or n')
