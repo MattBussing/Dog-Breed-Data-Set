@@ -1,5 +1,5 @@
 # Contributors: 
-Grace Carter, Alex Michael, Matt Bussing
+Grace Carter, Alex Michael, Matt Bussing, Rachel McManus
 # Images Originally From:
 http://vision.stanford.edu/aditya86/ImageNetDogs/.
 # Images Edited Phase:
@@ -11,5 +11,10 @@ This data is for my team's final project. We noticed that there were issues
 with the data. For
 example, inside toy terriers the photo, n02087046_7214, is
 an image of something other than a toy terrier. Thus, we are going to fix the inconsistencies and remove photos that will throw off the Machine Learning. For example, a dog wearing a bee costume.
+
+Inconsistencies fixed (removed):
+ - incorrect breed
+ - dog in a costume
+ - multiple dogs
 # Files:
  - datacleaning.py: Created by Alex and Grace. Does the cropping.
